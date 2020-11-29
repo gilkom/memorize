@@ -6,25 +6,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <header th:fragment="naglowek">
 <section>
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
+	<a class="navbar-brand mx-auto" href="#">Memory5!</a>
 
-	<a class="navbar-brand mb-0 h1" href="#">Memorize!</a>
+
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-
 	
-	<div class="collapse navbar-collapse " id="navbarMenu">
 
-	  		<button type="button" class="btn btn-dark">Strona główna</button>
-	  		<button type="button" class="btn btn-dark">Nauka</button>
-	  		<button type="button" class="btn btn-dark">Powtórki</button>
-	  		<button type="button" class="btn btn-dark">Baza słówek</button>
-	  		<button type="button" class="btn btn-dark">Statystki</button>
-
-	  		
-
-			</div>
+	<div class="collapse navbar-collapse navbar-nav mr-auto" id="navbarMenu">
+		<div class="navbar-nav">
+      		<a class="nav-item nav-link active" href="#">Strona główna <span class="sr-only">(current)</span></a>
+			<a class="nav-item nav-link" href="#">Nauka</a>
+      		<a class="nav-item nav-link" href="#">Powtórki</a>
+      		<a class="nav-item nav-link" href="#">Baza słówek</a>
+      		<a class="nav-item nav-link" href="#">Statystki</a>
+    	</div>
+	</div>
 </nav>
 
 
