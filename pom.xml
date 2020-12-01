@@ -11,6 +11,7 @@
 	<groupId>gilko.marcin</groupId>
 	<artifactId>memorize</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>memorize</name>
 	<description>Application for learning words</description>
 
@@ -46,8 +47,7 @@
 		<dependency>
 		    <groupId>org.postgresql</groupId>
 		    <artifactId>postgresql</artifactId>
-		    <version>42.2.9</version>
-		</dependency>
+		    </dependency>
 		
 	</dependencies>
 
