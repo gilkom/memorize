@@ -14,15 +14,12 @@
 </head>
 
 <body>
-
 <header id="header" class="alt" th:include="naglowek_baza_slowek.html :: naglowek"></header>
-
-
-<div class="container">
-	<table class="table bg-dark text-white">
+<div>
+<table class="table table-bordered table-striped table-dark table-hover">
 		<thead>
 			<tr>
-				<th>Id slowa</th>
+				<th>#</th>
 				<th>Słowo</th>
 				<th>Tłumaczenie</th>
 				<th>Rodzaj</th>
@@ -30,7 +27,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="slowo : ${listaSlow}">
+			<tr class="accordion-toggle collapsed" th:each="slowo : ${listaSlow}">
 				<td th:text="${slowo.id_slowa}">Id slowa</td>
 				<td th:text="${slowo.slowo}">Słowo</td>
 				<td th:text="${slowo.tlumaczenie}">Tłumaczenie</td>
@@ -40,8 +37,6 @@
 		</tbody>
 	</table>
 </div>
-
-<footer id="footer" class="footer" th:include="stopka.html :: stopka"></footer> 
 
 </body>
 </html>
