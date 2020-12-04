@@ -26,14 +26,29 @@
 				<th>Dzwięk</th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr class="accordion-toggle collapsed" th:each="slowo : ${listaSlow}">
+		<tbody th:each="slowo : ${listaSlow}">
+
+			<tr th:attr="data-target=|#demo${slowo.id_slowa}|" data-toggle="collapse">
 				<td th:text="${slowo.id_slowa}">Id slowa</td>
 				<td th:text="${slowo.slowo}">Słowo</td>
 				<td th:text="${slowo.tlumaczenie}">Tłumaczenie</td>
 				<td th:text="${slowo.rodzaj}">Rodzaj</td>
 				<td th:text="${slowo.dzwiek}">Dzwięk</td>
 			</tr>
+			
+			<tr>
+			<td  class="hiddenRow" colspan="5" height="10">
+				<div class="accordion-body collapse" th:id="'demo' +${slowo.id_slowa}">
+					<div class="row">
+					<a th:text="${slowo.id_slowa}"></a>
+					<a th:text="${slowo.slowo}"></a>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</div>
+				</div>
+			</td>
+			</tr>
+
+
 		</tbody>
 	</table>
 </div>
