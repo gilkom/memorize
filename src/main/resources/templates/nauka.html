@@ -17,10 +17,11 @@
 <header id="header" class="alt" th:include="naglowek.html :: naglowek"></header>
 
 <div class="jumbotron bg-dark text-white">
-	<h2>Nauka</h2>
+	<h3>Nauka</h3>
 </div>
 <div class="container">
-	<a>Wybierz ilość słówek do nauki:</a>
+	<form action="#" th:action="@{/nowe_slowo}" method="post">
+	<h5>Wybierz ilość słówek do nauki:
 	<select id="numberOfWords">
 		<option value="1">1</option>
 		<option value="2">2</option>
@@ -31,7 +32,7 @@
 		<option value="7">7</option>
 		<option value="8">8</option>
 		<option value="9">9</option>
-		<option value="10">10</option>
+		<option value="10" selected>10</option>
 		<option value="11">11</option>
 		<option value="12">12</option>
 		<option value="13">13</option>
@@ -43,6 +44,21 @@
 		<option value="19">19</option>
 		<option value="20">20</option>
 	</select>
+	</h5>
+	
+	<h5>Wybierz kategorię:
+		<select id="kategoria">
+			<option value="Wszystkie">Wszystkie</option>
+			<option value="Podróże">Podróże</option>
+			<option value="Sport">Sport</option>
+			<option value="Kuchnia">Kuchnia</option>
+			<option value="Polityka">Polityka</option>
+			<option value="Geografia">Geografia</option>		
+		</select>(Nieaktywne)
+		</h5>
+		<button type="submit" class="btn btn-success">Rozpocznij naukę</button>
+	</form>
+
 </div>
 
 <footer id="footer" class="footer" th:include="stopka.html :: stopka"></footer> 

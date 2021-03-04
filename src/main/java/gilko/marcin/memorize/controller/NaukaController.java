@@ -16,4 +16,10 @@ public class NaukaController {
 	public String nauka() {
 		return "nauka";
 	}
+	
+	@RequestMapping("/nowe_slowo")
+		public String nowe_slow() {
+			return "nowe_slowo";
+		}
+	
 }
