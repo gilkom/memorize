@@ -20,7 +20,7 @@
 	<h3>Nauka</h3>
 </div>
 <div class="container">
-	<form action="#" th:action="@{/nowe_slowo}" method="post">
+	<form action="#" th:action="@{/prezentacja}" method="post">
 	<h5>Wybierz ilość słówek do nauki:
 	<select id="numberOfWords">
 		<option value="1">1</option>
@@ -44,6 +44,8 @@
 		<option value="19">19</option>
 		<option value="20">20</option>
 	</select>
+		<a>Baza słówek:</a> 
+		<a th:text="${count}"></a>
 	</h5>
 	
 	<h5>Wybierz kategorię:

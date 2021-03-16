@@ -30,4 +30,8 @@ public class BazaSlowekService {
 	public void delete(Long id) {
 		repo.deleteById(id);
 	}
+	
+	public Long count() {
+		return repo.count();
+	}
 }
