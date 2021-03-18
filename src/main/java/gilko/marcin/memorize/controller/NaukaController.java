@@ -3,7 +3,10 @@ package gilko.marcin.memorize.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import gilko.marcin.memorize.service.BazaSlowekService;
 
@@ -20,9 +23,11 @@ public class NaukaController {
 		return "nauka";
 	}
 	
-	@RequestMapping("/prezentacja")
-		public String prezentacja() {
-			return "prezentacja";
+	@RequestMapping(value = "/prezentacja/{id}", method= RequestMethod.POST)
+		public String prezentacja(@PathVariable(name="id") Long pozycja, @RequestParam(value="numberOfWords") int numberOfWords) {
+		 	
+		
+		return "prezentacja";
 		}
 	
 }

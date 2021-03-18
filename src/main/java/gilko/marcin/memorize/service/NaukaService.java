@@ -1,5 +1,6 @@
 package gilko.marcin.memorize.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,19 @@ public class NaukaService {
 	
 	public void delete(Long id) {
 		repo.deleteById(id);
+	}
+	public List<Nauka> getByNumber(int numberOfWords){
+		List<Long> lista = getNieNauczone();
+		Collections.shuffle(lista);
+		Long[] limitedArray = new Long[numberOfWords];
+		for(int i = 0; i < limitedArray.length; i++) {
+			limitedArray[i] = lista.get(i);
+		}
+		return repo.getByNumber(limitedArray);
+		
+	}
+	
+	public List<Long> getNieNauczone(){
+		return repo.getNieNauczoneId();
 	}
 }
