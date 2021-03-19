@@ -17,20 +17,24 @@
 <header id="header" class="alt" th:include="naglowek.html :: naglowek"></header>
 
 <div class="jumbotron bg-secondary text-white" style="text-align:center">
-	<h3>Rower</h3>
+	<h3 th:text="${sl.slowo}"></h3>
 </div>
 <p align="center">
 <button type="button" class="btn btn-dark" onclick="showDiv()">Sprawdz</button><br><br>
 </p>
 <div id="tlumaczenie" style="display:none">
 	<div class="jumbotron bg-primary text-white" style="text-align:center;">
-		<h3>Bicycle</h3>
+		<h3 th:text="${sl.tlumaczenie}"></h3>
 	</div>
 	<div style="text-align:center;">
 		<!-- <button type="button" class="btn btn-success">Dobrze</button>
 		<button type="button" class="btn btn-warning">Średnio</button>
 		<button type="button" class="btn btn-danger">Źle</button>-->
-		<button type="button" class="btn btn-success">Dalej</button>
+		
+		<form method="post" th:action="@{/prezentacja/2}">
+		
+			<button type="submit" class="btn btn-success">Dalej</button>
+		</form>
 	</div>
 </div>
 <div class="container">
