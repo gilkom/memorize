@@ -35,7 +35,7 @@ public class Slowo {
 				rodzaj + ", dzwiek: " + dzwiek;
 	}
 	
-	public long getId_slowa() {
+	public Long getId_slowa() {
 		return id_slowa;
 	}
 	public void setId_slowa(Long id_slowa) {

@@ -18,4 +18,6 @@ public interface BazaSlowekRepository extends JpaRepository<Slowo, Long>{
 	@Query("Select s from Slowo s where s.id_slowa in (:limitedArray)")
 	List<Slowo> getByNumber(Long[] limitedArray);
 
+	@Query("Select min(s.id_slowa) from Slowo s")
+	Long getNextId(Long[] limitedArray);
 }

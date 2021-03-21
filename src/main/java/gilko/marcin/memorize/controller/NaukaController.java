@@ -31,22 +31,47 @@ public class NaukaController {
 		model.addAttribute("count", count);
 		return "nauka";
 	}
+	@RequestMapping(value="/prezentacja", method= RequestMethod.POST)
+	public ModelAndView prezentacjaPoczatek(@RequestParam(value="numberOfWords") int numberOfWords) {
+		ModelAndView mav = new ModelAndView("prezentacja");
+		List<Slowo> listSlowo = new ArrayList<>();
+	 	listSlowo = bazaService.getByNumber(numberOfWords);
+	 	
+	 	List<Nauka> listNauka = new ArrayList<>();
+	 	
+	 	for(int i = 0; i < listSlowo.size(); i++) {
+	 		Nauka nauka = new Nauka(i, listSlowo.get(i).);
+	 		nauka.setPozycja(i);
+	 		nauka.
+	 		
+	 	}
+	 	
+	 	
+	 	
+	 	Long id = bazaService.getNextId(listSlowo);
+		System.out.println("-----------id: " + id);
+		
+		Slowo sl = bazaService.get(id);
+	 	mav.addObject("sl",sl);
+	 	
+		return mav;
+	}
+	
 	
 	@RequestMapping(value = "/prezentacja/{id}", method= RequestMethod.POST)
 		public ModelAndView prezentacja(@PathVariable(name="id") Long pozycja, @RequestParam(value="numberOfWords") int numberOfWords) {
-			System.out.println("1----------------------------------------------");
+			
+		
 			ModelAndView mav = new ModelAndView("prezentacja");
-			System.out.println("2----------------------------------------------");
+			
 		 	List<Slowo> listSlowo = new ArrayList<>();
 		 	listSlowo = bazaService.getByNumber(numberOfWords);
-		 	System.out.println(listSlowo.toString());
-		 	System.out.println("3----------------------------------------------");
+		 	for(int i = 0; i< listSlowo.size(); i++) {
+		 		System.out.println("---i: " + listSlowo.get(i));
+		 	}
 		 	mav.addObject("listNauka", listSlowo);
-		 	System.out.println("4----------------------------------------------");
 		 	
 		 	Slowo sl = bazaService.get(pozycja);
-		 	System.out.println("----------slowo: " + sl.getSlowo());
-		 	System.out.println("----------tlumaczenie: " + sl.getTlumaczenie());
 		 	mav.addObject("sl",sl);
 		return mav;
 		}

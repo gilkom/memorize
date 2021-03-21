@@ -37,24 +37,26 @@ public class BazaSlowekService {
 		return repo.count();
 	}
 	public List<Slowo> getByNumber(int numberOfWords){
-		System.out.println("2.2----------------------------------------------");
 		List<Long> lista = getNieNauczone();
-		System.out.println("2.3----------------------------------------------");
 		Collections.shuffle(lista);
-		System.out.println("2.4----------------------------------------------");
 		Long[] limitedArray = new Long[numberOfWords];
-		System.out.println("2.5----------------------------------------------");
 		for(int i = 0; i < limitedArray.length; i++) {
 			limitedArray[i] = lista.get(i);
-			System.out.println("limitedArray: " + limitedArray[i] );
 		}
-		System.out.println("limitedArray.toString: " + limitedArray.toString() );
-		System.out.println("2.6----------------------------------------------");
 		return repo.getByNumber(limitedArray);
 		
 	}
 	
 	public List<Long> getNieNauczone(){
 		return repo.getNieNauczoneId();
+	}
+	
+	public Long getNextId(List<Slowo> listSlowo) {
+		Long[] limitedArray = new Long[listSlowo.size()];
+		for(int i = 0; i < limitedArray.length; i++) {
+			limitedArray[i] = listSlowo.get(i).getId_slowa();
+		}
+		return repo.getNextId(limitedArray);
+		
 	}
 }

@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import gilko.marcin.memorize.controller.nauka;
 import gilko.marcin.memorize.model.Nauka;
+import gilko.marcin.memorize.model.Slowo;
 import gilko.marcin.memorize.repository.NaukaRepository;
 
 @Service
@@ -34,13 +36,9 @@ public class NaukaService {
 		repo.deleteById(id);
 	}
 	public List<Nauka> getByNumber(int numberOfWords){
-		System.out.println("2.2----------------------------------------------");
 		List<Long> lista = getNieNauczone();
-		System.out.println("2.3----------------------------------------------");
 		Collections.shuffle(lista);
-		System.out.println("2.4----------------------------------------------");
 		Long[] limitedArray = new Long[numberOfWords];
-		System.out.println("2.5----------------------------------------------");
 		for(int i = 0; i < limitedArray.length; i++) {
 			limitedArray[i] = lista.get(i);
 			System.out.println("limitedArray: " + limitedArray[i] );
@@ -53,5 +51,16 @@ public class NaukaService {
 	
 	public List<Long> getNieNauczone(){
 		return repo.getNieNauczoneId();
+	}
+	
+	public void saveNaukaList(List<Slowo> listSlowo) {
+List<Nauka> listNauka = new ArrayList<>();
+	 	
+	 	for(int i = 0; i < listSlowo.size(); i++) {
+	 		Nauka nauka = new Nauka(i, listSlowo.get(i).);
+	 		nauka.setPozycja(i);
+	 		nauka.
+	 		
+	 	}
 	}
 }
