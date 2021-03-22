@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import gilko.marcin.memorize.controller.nauka;
+
 import gilko.marcin.memorize.model.Nauka;
 import gilko.marcin.memorize.model.Slowo;
 import gilko.marcin.memorize.repository.NaukaRepository;
@@ -54,13 +54,26 @@ public class NaukaService {
 	}
 	
 	public void saveNaukaList(List<Slowo> listSlowo) {
-List<Nauka> listNauka = new ArrayList<>();
+		List<Nauka> listNauka = new ArrayList<>();
 	 	
 	 	for(int i = 0; i < listSlowo.size(); i++) {
-	 		Nauka nauka = new Nauka(i, listSlowo.get(i).);
-	 		nauka.setPozycja(i);
-	 		nauka.
-	 		
+	 		Nauka nauka = new Nauka(Long.valueOf((i+1)), listSlowo.get(i).getId_slowa(),false, 0);
+	 		listNauka.add(nauka);
+	 		System.out.println(listNauka.get(i));
 	 	}
+	 	repo.saveAll(listNauka);
 	}
+	
+	public void deleteNaukaList() {
+		repo.deleteAll();
+	}
+	
+	public Long getMinId() {
+		return repo.getMinId();
+	}
+	
+	public boolean checkCzyUmiem() {
+		return repo.checkCzyUmiem();
+	}
+
 }

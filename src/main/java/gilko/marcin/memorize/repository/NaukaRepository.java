@@ -15,6 +15,12 @@ public interface NaukaRepository extends JpaRepository<Nauka, Long> {
 	@Query("Select s from Slowo s where s.id_slowa in (:limitedArray)")
 	List<Nauka> getByNumber(Long[] limitedArray);
 
+	@Query("Select min(n.pozycja) from Nauka n where n.czy_umiem = false")
+	Long getMinId();
+	
+	//@Query("Select n.czy_umiem from Nauka n where n.czy_umiem = true")
+	@Query("SELECT CASE WHEN COUNT(n) > 0 THEN true ELSE false END FROM Nauka n WHERE n.czy_umiem = true")
+	boolean checkCzyUmiem();
 	
 
 }

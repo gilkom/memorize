@@ -15,7 +15,7 @@
 
 <body>
 <header id="header" class="alt" th:include="naglowek.html :: naglowek"></header>
-
+<h3 th:text="${numberOfWords}"></h3>
 <div class="jumbotron bg-secondary text-white" style="text-align:center">
 	<h3 th:text="${sl.slowo}"></h3>
 </div>
@@ -31,8 +31,8 @@
 		<button type="button" class="btn btn-warning">Średnio</button>
 		<button type="button" class="btn btn-danger">Źle</button>-->
 		
-		<form method="post" th:action="@{/prezentacja/2}">
-		
+		<form method="post" th:action="@{/prezentacja}">
+		<input type="hidden" name = "numberOfWords" th:value="${numberOfWords}"/>
 			<button type="submit" class="btn btn-success">Dalej</button>
 		</form>
 	</div>

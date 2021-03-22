@@ -10,7 +10,6 @@ import javax.persistence.Table;
 @Table(name= "memo_nauka")
 public class Nauka {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long pozycja;
 	private Long id_slowa;
 	private boolean czy_umiem;

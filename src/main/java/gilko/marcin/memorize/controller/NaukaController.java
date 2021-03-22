@@ -33,26 +33,27 @@ public class NaukaController {
 	}
 	@RequestMapping(value="/prezentacja", method= RequestMethod.POST)
 	public ModelAndView prezentacjaPoczatek(@RequestParam(value="numberOfWords") int numberOfWords) {
+		if(naukaService.checkCzyUmiem()!=true) {
+			System.out.println("czyUmiem= true");
+			List<Slowo> listSlowo = new ArrayList<>();
+		 	listSlowo = bazaService.getByNumber(numberOfWords);
+		 	
+		 	naukaService.deleteNaukaList();
+		 	naukaService.saveNaukaList(listSlowo);
+		 	
+		 	//List<Nauka> listNauka = new ArrayList<>();
+		}
 		ModelAndView mav = new ModelAndView("prezentacja");
-		List<Slowo> listSlowo = new ArrayList<>();
-	 	listSlowo = bazaService.getByNumber(numberOfWords);
+	 	Long id = naukaService.getMinId();
+	 	Nauka nauka = new Nauka();
+	 	nauka = naukaService.get(id);
+	 	nauka.setCzy_umiem(true);
+	 	naukaService.save(nauka);
 	 	
-	 	List<Nauka> listNauka = new ArrayList<>();
-	 	
-	 	for(int i = 0; i < listSlowo.size(); i++) {
-	 		Nauka nauka = new Nauka(i, listSlowo.get(i).);
-	 		nauka.setPozycja(i);
-	 		nauka.
-	 		
-	 	}
-	 	
-	 	
-	 	
-	 	Long id = bazaService.getNextId(listSlowo);
-		System.out.println("-----------id: " + id);
 		
 		Slowo sl = bazaService.get(id);
 	 	mav.addObject("sl",sl);
+	 	mav.addObject("numberOfWords", numberOfWords);
 	 	
 		return mav;
 	}
