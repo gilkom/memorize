@@ -32,49 +32,48 @@ public class NaukaController {
 		return "nauka";
 	}
 	@RequestMapping(value="/prezentacja", method= RequestMethod.POST)
-	public ModelAndView prezentacjaPoczatek(@RequestParam(value="numberOfWords") int numberOfWords) {
-		if(naukaService.checkCzyUmiem()!=true) {
-			System.out.println("czyUmiem= true");
+	public ModelAndView prezentacjaPoczatek(@RequestParam(value="numberOfWords") int numberOfWords,
+											@RequestParam(value="firstFlag") int firstFlag){
+		
+	
+		/*If we start prezentacja  we need to load new words into nauka table.
+		 * FirstFlag parameter as 0 loads from nauka page and firstFlag parameter = 1 loads from
+		 * prezentacja page. It helps to start prezentacja from the beginnig every time and not in
+		 * the middle if we accidentally shut the page.
+		 */
+		if(firstFlag == 0) {
 			List<Slowo> listSlowo = new ArrayList<>();
 		 	listSlowo = bazaService.getByNumber(numberOfWords);
 		 	
 		 	naukaService.deleteNaukaList();
-		 	naukaService.saveNaukaList(listSlowo);
-		 	
-		 	//List<Nauka> listNauka = new ArrayList<>();
+		 	naukaService.saveNaukaList(listSlowo);	 	
 		}
-		ModelAndView mav = new ModelAndView("prezentacja");
-	 	Long id = naukaService.getMinId();
-	 	Nauka nauka = new Nauka();
-	 	nauka = naukaService.get(id);
-	 	nauka.setCzy_umiem(true);
-	 	naukaService.save(nauka);
-	 	
 		
-		Slowo sl = bazaService.get(id);
-	 	mav.addObject("sl",sl);
-	 	mav.addObject("numberOfWords", numberOfWords);
-	 	
-		return mav;
-	}
-	
-	
-	@RequestMapping(value = "/prezentacja/{id}", method= RequestMethod.POST)
-		public ModelAndView prezentacja(@PathVariable(name="id") Long pozycja, @RequestParam(value="numberOfWords") int numberOfWords) {
-			
-		
+		Long id = naukaService.getMinId();//if table nauka is empty we set the first id as 1
+		if(id == null) {
+			id = Long.valueOf(1);
+		}
 			ModelAndView mav = new ModelAndView("prezentacja");
-			
-		 	List<Slowo> listSlowo = new ArrayList<>();
-		 	listSlowo = bazaService.getByNumber(numberOfWords);
-		 	for(int i = 0; i< listSlowo.size(); i++) {
-		 		System.out.println("---i: " + listSlowo.get(i));
-		 	}
-		 	mav.addObject("listNauka", listSlowo);
+
+		 	Nauka nauka = new Nauka();
+		 	nauka = naukaService.get(id);
+		 	nauka.setCzy_umiem(true);
+		 	naukaService.save(nauka);
 		 	
-		 	Slowo sl = bazaService.get(pozycja);
+			Slowo sl = bazaService.get(id);
 		 	mav.addObject("sl",sl);
-		return mav;
-		}
+		 	mav.addObject("numberOfWords", numberOfWords);
+		 	mav.addObject("id", id);
+		 	
+		
+			return mav;
+		
+		
+	}
+	@RequestMapping("/prezentacja/przerwij")
+	public String prezentacjaPrzerwij() {
+		naukaService.deleteNaukaList();
+		return "redirect:/nauka";
+	}
 	
 }

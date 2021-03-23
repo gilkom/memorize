@@ -15,7 +15,12 @@
 
 <body>
 <header id="header" class="alt" th:include="naglowek.html :: naglowek"></header>
-<h3 th:text="${numberOfWords}"></h3>
+<div>
+	<a>Liczba słów: </a><a th:text="${id}"></a>/
+	<a th:text="${numberOfWords}"></a>
+	<a th:href="@{'/prezentacja/przerwij'}" class="btn btn-dark">Przerwij</a>
+</div>
+
 <div class="jumbotron bg-secondary text-white" style="text-align:center">
 	<h3 th:text="${sl.slowo}"></h3>
 </div>
@@ -33,8 +38,15 @@
 		
 		<form method="post" th:action="@{/prezentacja}">
 		<input type="hidden" name = "numberOfWords" th:value="${numberOfWords}"/>
-			<button type="submit" class="btn btn-success">Dalej</button>
+		<input type="hidden" name = "firstFlag" th:value="1"/>
+			<div th:if="${id} != ${numberOfWords}">
+				<button id="dalej" type="submit" class="btn btn-success">Dalej</button>
+			</div>
+			<div th:if="${id} == ${numberOfWords}">
+			<button id="koniec"  type="submit" class="btn btn-success" th:formaction="@{/nauka}">Koniec</button>
+		</div>
 		</form>
+	
 	</div>
 </div>
 <div class="container">
@@ -43,10 +55,14 @@
 
 <footer id="footer" class="footer" th:include="stopka.html :: stopka"></footer> 
 
+
+
 <script>
 function showDiv() {
    document.getElementById('tlumaczenie').style.display = "block";
 }
 </script>
+
+
 </body>
 </html>
