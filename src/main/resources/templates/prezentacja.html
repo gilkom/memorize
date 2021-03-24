@@ -14,11 +14,13 @@
 </head>
 
 <body>
-<header id="header" class="alt" th:include="naglowek.html :: naglowek"></header>
-<div>
+<header id="header" class="alt" th:include="naglowek_prezentacja.html :: naglowek"></header>
+<div class="container-xl">
+	<div>
+		<a th:href="@{'/prezentacja/przerwij'}" class="btn btn-dark">Przerwij</a>
+	</div>
 	<a>Liczba słów: </a><a th:text="${id}"></a>/
 	<a th:text="${numberOfWords}"></a>
-	<a th:href="@{'/prezentacja/przerwij'}" class="btn btn-dark">Przerwij</a>
 </div>
 
 <div class="jumbotron bg-secondary text-white" style="text-align:center">
@@ -43,7 +45,7 @@
 				<button id="dalej" type="submit" class="btn btn-success">Dalej</button>
 			</div>
 			<div th:if="${id} == ${numberOfWords}">
-			<button id="koniec"  type="submit" class="btn btn-success" th:formaction="@{/nauka}">Koniec</button>
+			<button id="koniec"  type="submit" class="btn btn-success" th:formaction="@{/prezentacja/koniec}">Koniec</button>
 		</div>
 		</form>
 	

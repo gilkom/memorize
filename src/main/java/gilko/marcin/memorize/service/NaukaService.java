@@ -59,7 +59,6 @@ public class NaukaService {
 	 	for(int i = 0; i < listSlowo.size(); i++) {
 	 		Nauka nauka = new Nauka(Long.valueOf((i+1)), listSlowo.get(i).getId_slowa(),false, 0);
 	 		listNauka.add(nauka);
-	 		System.out.println(listNauka.get(i));
 	 	}
 	 	repo.saveAll(listNauka);
 	}
@@ -75,5 +74,19 @@ public class NaukaService {
 	public boolean checkCzyUmiem() {
 		return repo.checkCzyUmiem();
 	}
+	
+	public void setAllCzyUmiemToFalse(List<Nauka> listNauka) {
+		for(int i = 0; i < listNauka.size(); i++) {
+			listNauka.get(i).setCzy_umiem(false);
+		}
+	}
+	
+	public void setAllWspolczynnikToOne(List<Nauka> listNauka) {
+		for(int i = 0; i < listNauka.size(); i++) {
+			listNauka.get(i).setWspolczynnik_powtorek(1);
+		}
+	}
+	
+	
 
 }

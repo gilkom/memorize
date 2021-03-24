@@ -22,5 +22,4 @@ public interface NaukaRepository extends JpaRepository<Nauka, Long> {
 	@Query("SELECT CASE WHEN COUNT(n) > 0 THEN true ELSE false END FROM Nauka n WHERE n.czy_umiem = true")
 	boolean checkCzyUmiem();
 	
-
 }

@@ -20,4 +20,10 @@ public interface BazaSlowekRepository extends JpaRepository<Slowo, Long>{
 
 	@Query("Select min(s.id_slowa) from Slowo s")
 	Long getNextId(Long[] limitedArray);
+	
+	@Query("Select s from Slowo s where s.tlumaczenie like :like and s.tlumaczenie not like :tlumaczenie")
+	List<Slowo> searchWordsLike(String like, String tlumaczenie);
+	
+	@Query("Select s from Slowo s where s.tlumaczenie not like :like and s.tlumaczenie not like :tlumaczenie")
+	List<Slowo> searchWordsNotLike(String like, String tlumaczenie);
 }

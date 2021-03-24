@@ -1,5 +1,6 @@
 package gilko.marcin.memorize.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -58,5 +59,23 @@ public class BazaSlowekService {
 		}
 		return repo.getNextId(limitedArray);
 		
+	}
+	
+	public List<Slowo> searchWordsLike(String tlumaczenie){
+		List<Slowo> listOfWordsLike = new ArrayList<>();
+		String like = tlumaczenie.substring(0, 1) + "%";
+		listOfWordsLike = repo.searchWordsLike(like, tlumaczenie);
+		//not the best solution
+		if(listOfWordsLike.size() < 3) {
+			List<Slowo> listOfAllWords = repo.searchWordsNotLike(like, tlumaczenie);
+			Collections.shuffle(listOfAllWords);
+			for(int i =0; i < 3-listOfWordsLike.size();i++) {
+				listOfWordsLike.add(listOfAllWords.get(i));
+			}
+			
+		}
+		
+		
+		return listOfWordsLike;
 	}
 }
