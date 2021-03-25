@@ -114,15 +114,22 @@ public class NaukaController {
 		 	
 		 	Slowo sl = new Slowo();
 		 	sl = bazaService.get(id);
-		 	
+
+		 	//Creating list of 4 words for quiz
 		 	List<Slowo> listLikeSlowo = new ArrayList<>();
 		 	listLikeSlowo = bazaService.searchWordsLike(sl.getTlumaczenie());
 		 	listLikeSlowo.add(sl);
 		 	Collections.shuffle(listLikeSlowo);
-		 	for(int i = 0; i < listLikeSlowo.size(); i++) {
-		 		System.out.println(listLikeSlowo.get(i).toString());
-		 	}
 		 	
+		 	Slowo pierwszy = listLikeSlowo.get(0);
+		 	Slowo drugi = listLikeSlowo.get(1);
+		 	Slowo trzeci = listLikeSlowo.get(2);
+		 	Slowo czwarty = listLikeSlowo.get(3);
+
+		 	mav.addObject("pierwszy", pierwszy);
+		 	mav.addObject("drugi", drugi);
+		 	mav.addObject("trzeci", trzeci);
+		 	mav.addObject("czwarty", czwarty);
 		 	mav.addObject("sl", sl);
 		 	mav.addObject("nauka", nauka);
 		 	mav.addObject("id", id);
@@ -131,4 +138,11 @@ public class NaukaController {
 			return mav;
 	}
 	
+	@RequestMapping(value = "/wybierz_tlumaczenie_angielskie/nastepny", method = RequestMethod.POST)
+	public String wybierzTlumaczenieAngielskieNastepny(@RequestParam(value = "answer") int answer,
+														@RequestParam(value= "id")Long id) {
+		System.out.println("answer: " + answer);
+		System.out.println("id: " + id);
+		return "redirect:/wybierz_tlumaczenie_angielskie";
+	}
 }
