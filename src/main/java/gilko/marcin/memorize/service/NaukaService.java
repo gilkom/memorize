@@ -57,7 +57,7 @@ public class NaukaService {
 		List<Nauka> listNauka = new ArrayList<>();
 	 	
 	 	for(int i = 0; i < listSlowo.size(); i++) {
-	 		Nauka nauka = new Nauka(Long.valueOf((i+1)), listSlowo.get(i).getId_slowa(),false, 0);
+	 		Nauka nauka = new Nauka(Long.valueOf((i+1)), listSlowo.get(i).getId_slowa(),false, 0.0);
 	 		listNauka.add(nauka);
 	 	}
 	 	repo.saveAll(listNauka);
@@ -71,6 +71,15 @@ public class NaukaService {
 		return repo.getMinId();
 	}
 	
+	public Double getMinWspolczynnik() {
+		return repo.getMinWspolczynnik();
+	}
+	
+	public Long getMinIdAndWspolczynnik(Double minWspolczynnik) {
+		return repo.getMinIdAndWspolczynnik(minWspolczynnik);
+	}
+
+	
 	public boolean checkCzyUmiem() {
 		return repo.checkCzyUmiem();
 	}
@@ -83,8 +92,12 @@ public class NaukaService {
 	
 	public void setAllWspolczynnikToOne(List<Nauka> listNauka) {
 		for(int i = 0; i < listNauka.size(); i++) {
-			listNauka.get(i).setWspolczynnik_powtorek(1);
+			listNauka.get(i).setWspolczynnik_powtorek(1.0);
 		}
+	}
+	
+	public int countCzyUmiem() {
+		return repo.countCzyUmiem();
 	}
 	
 	

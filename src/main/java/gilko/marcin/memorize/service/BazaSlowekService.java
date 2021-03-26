@@ -69,13 +69,11 @@ public class BazaSlowekService {
 		if(listOfWordsLike.size() < 3) {
 			List<Slowo> listOfAllWords = repo.searchWordsNotLike(like, tlumaczenie);
 			Collections.shuffle(listOfAllWords);
-			for(int i =0; i < 3-listOfWordsLike.size();i++) {
+			int looop = 3-listOfWordsLike.size();
+			for(int i =0; i < looop;i++) {
 				listOfWordsLike.add(listOfAllWords.get(i));
 			}
-			
 		}
-		
-		
 		return listOfWordsLike;
 	}
 }

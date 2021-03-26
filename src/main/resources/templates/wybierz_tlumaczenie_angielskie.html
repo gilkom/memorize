@@ -15,17 +15,19 @@
 
 <body>
 <header id="header" class="alt" th:include="naglowek_wybierz_tlumaczenie.html :: naglowek"></header>
-<div class="container-xl">
+<div class="container">
 	<div>
 		<a th:href="@{'/prezentacja/przerwij'}" class="btn btn-dark">Przerwij</a>
 	</div>
-	<a>Liczba słów: </a><a th:text="${id}"></a>/
+	<a>Poprawne: </a><a th:text="${nauczone}"></a>/
 	<a th:text="${count}"></a>
 	<hr/>
 </div>
-<div class="jumbotron bg-secondary text-white" style="text-align:center">
-	<h5 th:text="${sl.slowo}"></h5>
-	<input type="hidden" id="tlum" th:value="${sl.tlumaczenie}"></input>
+<div class="container">
+	<div class="jumbotron bg-secondary text-white" style="text-align:center;">
+		<h5 th:text="${sl.slowo}"></h5>
+		<input type="hidden" id="tlum" th:value="${sl.tlumaczenie}"></input>
+	</div>
 </div>
 
 <div class="container">
@@ -38,6 +40,16 @@
 <hr/>
 
 
+<div  id="wrong"  class="container" style="display:none">
+	<h3 style="color:red; text-align:center;">Źle!</h3>
+</div>
+
+
+<div  id="good"  class="container" style="display:none">
+	<h3 style="color:green; text-align:center;">Dobrze!</h3>
+</div>
+
+
 <div id="tlumaczenie" class="container" style="display:none">
 	<div class="jumbotron bg-success text_white" style="text-align:center;">
 		<p>
@@ -47,13 +59,19 @@
 	<div>
 		<form method="post" th:action="@{/wybierz_tlumaczenie_angielskie/nastepny}">
 			<input id="answer" type="hidden" name="answer" th:value="0"/>
+			<input id="nauczone" type="hidden" name="answer" th:value="${nauczone}+ 1"/>
+			<input id="count" type="hidden" name="answer" th:value="${count}"/>
 			<input id="id" type="hidden" name="id" th:value="${id}"/>
-			<button id="dalej" type="submit" class="btn btn-dark">Dalej</button>
+			
+			<div id="dalejButton" style="display:none">
+				<button id="dalej" type="submit" class="btn float-right btn-dark">Dalej</button>
+			</div>
+			<div id="koniecButton" style="display:none">
+				<button id="koniec"  type="submit" class="btn float-right btn-success" th:formaction="@{/wybierz_tlumaczenie_angielskie/koniec}">Koniec</button>
+			</div>
 		</form>
+	</div>
 </div>
-</div>
-
-
 
 <footer id="footer" class="footer" th:include="stopka.html :: stopka"></footer> 
 
@@ -61,21 +79,32 @@
 
 <script>
 function showDiv(id) {
-	var x=document.getElementById('answer').value;
+	var x=document.getElementById('nauczone').value;
 	console.log(x);
-   document.getElementById('tlumaczenie').style.display = "block";
+	var y=document.getElementById('count').value;
+	console.log(y);
    if(document.getElementById(id).value == document.getElementById('tlum').value){
+	   if(document.getElementById('nauczone').value != document.getElementById('count').value){
+	   		document.getElementById('dalejButton').style.display = "block";
+	   }else{
+		   document.getElementById('koniecButton').style.display = "block";
+	   }
+	   document.getElementById('tlumaczenie').style.display = "block";
+	   document.getElementById('good').style.display= "block";
 	   document.getElementById(id).style.background = "green";
 	   document.getElementById('answer').value = '1';
-	   console.log(document.getElementById('answer').value);
    }else{
+	   document.getElementById('dalejButton').style.display = "block";
+	   document.getElementById('tlumaczenie').style.display = "block";
+	   document.getElementById('wrong').style.display= "block";
 	   document.getElementById(id).style.background = "red";
-	   document.getElementById('answer').value = 0;
+	   document.getElementById('answer').value = '0';
    };
    document.getElementById('pierwszy').onclick =false;
    document.getElementById('drugi').onclick =false;
    document.getElementById('trzeci').onclick =false;
    document.getElementById('czwarty').onclick =false;
+
 }
 </script>
 

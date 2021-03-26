@@ -13,11 +13,11 @@ public class Nauka {
 	private Long pozycja;
 	private Long id_slowa;
 	private boolean czy_umiem;
-	private int wspolczynnik_powtorek;
+	private Double wspolczynnik_powtorek;
 	
 	public Nauka() {};
 	
-	public Nauka(Long pozycja, Long id_slowa, boolean czy_umiem, int wspolczynnik_powtorek) {
+	public Nauka(Long pozycja, Long id_slowa, boolean czy_umiem, Double wspolczynnik_powtorek) {
 		this.pozycja = pozycja;
 		this.id_slowa = id_slowa;
 		this.czy_umiem = czy_umiem;
@@ -53,11 +53,11 @@ public class Nauka {
 		this.czy_umiem = czy_umiem;
 	}
 
-	public int getWspolczynnik_powtorek() {
+	public Double getWspolczynnik_powtorek() {
 		return wspolczynnik_powtorek;
 	}
 
-	public void setWspolczynnik_powtorek(int wspolczynnik_powtorek) {
+	public void setWspolczynnik_powtorek(Double wspolczynnik_powtorek) {
 		this.wspolczynnik_powtorek = wspolczynnik_powtorek;
 	}
 }

@@ -18,8 +18,18 @@ public interface NaukaRepository extends JpaRepository<Nauka, Long> {
 	@Query("Select min(n.pozycja) from Nauka n where n.czy_umiem = false")
 	Long getMinId();
 	
+	@Query("Select min(n.wspolczynnik_powtorek) from Nauka n where n.czy_umiem = false")
+	Double getMinWspolczynnik();
+	
+	@Query("Select min(n.pozycja) from Nauka n where n.czy_umiem = false and n.wspolczynnik_powtorek = :minWspolczynnik")
+	Long getMinIdAndWspolczynnik(Double minWspolczynnik);
+	
 	//@Query("Select n.czy_umiem from Nauka n where n.czy_umiem = true")
 	@Query("SELECT CASE WHEN COUNT(n) > 0 THEN true ELSE false END FROM Nauka n WHERE n.czy_umiem = true")
 	boolean checkCzyUmiem();
+	
+	@Query("SELECT count(n) from Nauka n where n.czy_umiem = true")
+	int countCzyUmiem();
+	
 	
 }
