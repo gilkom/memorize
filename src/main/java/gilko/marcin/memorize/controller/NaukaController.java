@@ -32,6 +32,12 @@ public class NaukaController {
 		model.addAttribute("count", count);
 		return "nauka";
 	}
+	//----------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------	
+	//Prezentacja-----------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------
+	
 	@RequestMapping(value="/prezentacja/poczatek", method= RequestMethod.POST)
 	public String prezentacjaPoczatek(@RequestParam(value="numberOfWords") int numberOfWords) {
 		List<Slowo> listSlowo = new ArrayList<>();
@@ -80,6 +86,14 @@ public class NaukaController {
 		
 		return "redirect:/wybierz_tlumaczenie_angielskie";
 	}
+	
+	//----------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------	
+	//Wybierz tlumaczenie angielskie-----------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------
+		
+	//this is only made for faster testing
 	@RequestMapping("/wybierz_tlumaczenie_angielskie/poczatek")
 	public String wybierzTlumaczenieAngielskiePoczatek() {
 		List<Slowo> listSlowo = new ArrayList<>();
@@ -99,15 +113,13 @@ public class NaukaController {
 	
 	@RequestMapping("/wybierz_tlumaczenie_angielskie")
 	public ModelAndView wybierzTlumaczenieAngielskie() {
-			System.out.println("xxx");
 			Double minWspolczynnik = naukaService.getMinWspolczynnik();
 			int nauczone = naukaService.countCzyUmiem();
-			int nauczoneKoniec = nauczone+1;
 			Long id = naukaService.getMinIdAndWspolczynnik(minWspolczynnik);
-			if(id == null) {
+			/*if(id == null) {
 				System.out.println("xxx2");
 				prezentacjaKoniec();
-			}
+			}*/
 			int count = naukaService.list().size();
 			ModelAndView mav = new ModelAndView("wybierz_tlumaczenie_angielskie");
 		 	Nauka nauka = new Nauka();
@@ -139,7 +151,6 @@ public class NaukaController {
 		 	mav.addObject("count", count);
 		 	mav.addObject("listLikeSlowo", listLikeSlowo);
 		 	mav.addObject("nauczone", nauczone);
-		 	mav.addObject("nauczoneKoniec", nauczoneKoniec);
 			return mav;
 	}
 	
@@ -157,6 +168,93 @@ public class NaukaController {
 	}
 	@RequestMapping("/wybierz_tlumaczenie_angielskie/koniec")
 	public String wybierzTlumaczenieAnieglskieKoniec() {
+		List<Nauka> naukaList = new ArrayList<>();
+		naukaList = naukaService.list();
+		
+		naukaService.setAllCzyUmiemToFalse(naukaList);
+		
+		return "redirect:/wybierz_tlumaczenie_polskie";
+	}
+	//----------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------	
+	//Wybierz tlumaczenie polskie-----------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------
+		
+	//this is only made for faster testing
+	@RequestMapping("/wybierz_tlumaczenie_polskie/poczatek")
+	public String wybierzTlumaczeniePolskiePoczatek() {
+		List<Slowo> listSlowo = new ArrayList<>();
+	 	listSlowo = bazaService.getByNumber(5);
+	 	
+	 	
+	 	
+	 	naukaService.deleteNaukaList();
+	 	naukaService.saveNaukaList(listSlowo);
+	 	
+	 	List<Nauka> naukaList = new ArrayList<>();
+	 	naukaList = naukaService.list();
+	 	
+	 	naukaService.setAllWspolczynnikToOne(naukaList);
+	 	return "redirect:/wybierz_tlumaczenie_polskie";
+	}
+	
+	@RequestMapping("/wybierz_tlumaczenie_polskie")
+	public ModelAndView wybierzTlumaczeniePolskie() {
+			Double minWspolczynnik = naukaService.getMinWspolczynnik();
+			int nauczone = naukaService.countCzyUmiem();
+			Long id = naukaService.getMinIdAndWspolczynnik(minWspolczynnik);
+			/*if(id == null) {
+				prezentacjaKoniec();
+			}*/
+			int count = naukaService.list().size();
+			ModelAndView mav = new ModelAndView("wybierz_tlumaczenie_polskie");
+		 	Nauka nauka = new Nauka();
+		 	nauka = naukaService.get(id);
+		 	
+		 	Slowo sl = new Slowo();
+		 	sl = bazaService.get(id);
+
+		 	//Creating list of 4 words for quiz
+		 	List<Slowo> listLikeSlowo = new ArrayList<>();
+		 	listLikeSlowo = bazaService.searchWordsLike(sl.getSlowo());
+
+		 	listLikeSlowo.add(sl);
+
+		 	Collections.shuffle(listLikeSlowo);
+
+		 	Slowo pierwszy = listLikeSlowo.get(0);
+		 	Slowo drugi = listLikeSlowo.get(1);
+		 	Slowo trzeci = listLikeSlowo.get(2);
+		 	Slowo czwarty = listLikeSlowo.get(3);
+
+		 	mav.addObject("pierwszy", pierwszy);
+		 	mav.addObject("drugi", drugi);
+		 	mav.addObject("trzeci", trzeci);
+		 	mav.addObject("czwarty", czwarty);
+		 	mav.addObject("sl", sl);
+		 	mav.addObject("nauka", nauka);
+		 	mav.addObject("id", id);
+		 	mav.addObject("count", count);
+		 	mav.addObject("listLikeSlowo", listLikeSlowo);
+		 	mav.addObject("nauczone", nauczone);
+			return mav;
+	}
+	@RequestMapping(value = "/wybierz_tlumaczenie_polskie/nastepny", method = RequestMethod.POST)
+	public String wybierzTlumaczeniePolskieNastepny(@RequestParam(value = "answer") int answer,
+														@RequestParam(value= "id")Long id) {
+		Nauka nauka = naukaService.get(id);
+		if(answer == 1) {
+			nauka.setCzy_umiem(true);
+		}else {
+			nauka.setWspolczynnik_powtorek(nauka.getWspolczynnik_powtorek()+ 0.01);
+		}
+		naukaService.save(nauka);
+		return "redirect:/wybierz_tlumaczenie_polskie";
+	}
+	
+	@RequestMapping("/wybierz_tlumaczenie_polskie/koniec")
+	public String wybierzTlumaczeniePolskieKoniec() {
 		List<Nauka> naukaList = new ArrayList<>();
 		naukaList = naukaService.list();
 		

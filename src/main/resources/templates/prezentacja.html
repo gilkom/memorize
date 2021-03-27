@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      >
 <head>
 	<meta charset="ISO-8859-1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,6 +22,14 @@
 	</div>
 	<a>Liczba słów: </a><a th:text="${id}"></a>/
 	<a th:text="${numberOfWords}"></a>
+</div>
+
+<div>
+
+<audio controls autoplay>
+  <source src="https://www.dropbox.com/s/gbfndc22fc9s89u/beautiful.mp3?dl=0" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
 </div>
 
 <div class="jumbotron bg-secondary text-white" style="text-align:center">
@@ -45,9 +54,37 @@
 				<button id="dalej" type="submit" class="btn btn-success">Dalej</button>
 			</div>
 			<div th:if="${id} == ${numberOfWords}">
-			<button id="koniec"  type="submit" class="btn btn-success" th:formaction="@{/prezentacja/koniec}">Koniec</button>
+			<button id="koniec"  type="button" class="btn btn-success" data-toggle="modal" data-target="#etapyModal">Koniec</button>
 		</div>
+		
+		<div class="modal fade" id="etapyModal" tabindex="-1" role="dialog" aria-labelledby="etapyModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header bg-success">
+					<h5 class="modal-title text-white" id="etapyModalLabel">Nauka słówek:</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class="font-weight-bold" style="text-align:left;">&#10003;1. Prezentacja</p>
+					<p class="text-secondary" style="text-align:left;">&emsp;2. Wybierz tłumaczenie angielskie</p>
+					<p class="text-secondary" style="text-align:left;">&emsp;3. Wybierz tłumaczenie polskie</p>
+					<p class="text-secondary" style="text-align:left;">&emsp;4. Rozpoznawanie ze słuchu</p>
+					<p class="text-secondary" style="text-align:left;">&emsp;5. Dyktando</p>
+					<p class="text-secondary" style="text-align:left;">&emsp;6. Wpisz tłumaczenie</p>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-dark" th:formaction="@{'/prezentacja/przerwij'}">Przerwij</button>
+					<button type="submit" class="btn btn-success"  th:formaction="@{/prezentacja/koniec}">Następny etap</button>
+				</div>
+			</div>
+		</div>
+	</div>
+		
 		</form>
+		
 	
 	</div>
 </div>

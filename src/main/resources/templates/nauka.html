@@ -58,8 +58,34 @@
 			<option value="Geografia">Geografia</option>		
 		</select>(Nieaktywne)
 		</h5>
-		<button type="submit" class="btn btn-success">Rozpocznij naukę</button>
+		<button type="button" class="btn btn-success"data-toggle="modal" data-target="#etapyModal">Rozpocznij naukę</button>
+		
+		<div class="modal fade" id="etapyModal" tabindex="-1" role="dialog" aria-labelledby="etapyModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header bg-success">
+					<h5 class="modal-title text-white" id="etapyModalLabel">Nauka słówek:</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class="font-weight-bold" style="text-align:left;">&emsp;1. Prezentacja</p>
+					<p class="text-secondary" style="text-align:left;">&emsp;2. Wybierz tłumaczenie angielskie</p>
+					<p class="text-secondary" style="text-align:left;">&emsp;3. Wybierz tłumaczenie polskie</p>
+					<p class="text-secondary" style="text-align:left;">&emsp;4. Rozpoznawanie ze słuchu</p>
+					<p class="text-secondary" style="text-align:left;">&emsp;5. Dyktando</p>
+					<p class="text-secondary" style="text-align:left;">&emsp;6. Wpisz tłumaczenie</p>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success">Rozpocznij naukę</button>
+				</div>
+			</div>
+		</div>
+	</div>
 		<button type="submit" class="btn btn-success" th:formaction="@{/wybierz_tlumaczenie_angielskie/poczatek}">Wybierz tłumaczenie angielskie</button>
+		<button type="submit" class="btn btn-success" th:formaction="@{/wybierz_tlumaczenie_polskie/poczatek}">Wybierz tłumaczenie polskie</button>
 	</form>
 
 </div>
