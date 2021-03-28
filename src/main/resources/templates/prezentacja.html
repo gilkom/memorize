@@ -18,23 +18,25 @@
 <header id="header" class="alt" th:include="naglowek_prezentacja.html :: naglowek"></header>
 <div class="container-xl">
 	<div>
-		<a th:href="@{'/prezentacja/przerwij'}" class="btn btn-dark">Przerwij</a>
+		<a th:href="@{'/prezentacja/przerwij'}" class="btn btn-dark" style="display: inline-block;">Przerwij</a>
+		<div style="text-align: right;">
+			<a style="display: inline-block;">Liczba słów: </a>
+			<a style="display: inline-block;" th:text="${id}"></a>/
+			<a style="display: inline-block;" th:text="${numberOfWords}"></a>
+		</div>
+		<div style="text-align: right;">
+			<a class="btn" id="play-button" style="display: inline-block;font-size:8vw;" onclick="playSound()">&rtrif;</a>
+		</div>
+		<audio id = "play" autoplay>
+  			<source th:src="${sl.dzwiek}" type="audio/mpeg">
+		</audio>
 	</div>
-	<a>Liczba słów: </a><a th:text="${id}"></a>/
-	<a th:text="${numberOfWords}"></a>
-</div>
-
-<div>
-
-<audio controls autoplay>
-  <source src="https://www.dropbox.com/s/gbfndc22fc9s89u/beautiful.mp3?dl=0" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
 </div>
 
 <div class="jumbotron bg-secondary text-white" style="text-align:center">
-	<h3 th:text="${sl.slowo}"></h3>
+	<h3 th:text="${sl.slowo}"style="display: inline-block"></h3> 
 </div>
+
 <p align="center">
 <button type="button" class="btn btn-dark" onclick="showDiv()">Sprawdz</button><br><br>
 </p>
@@ -99,6 +101,9 @@ Your browser does not support the audio element.
 <script>
 function showDiv() {
    document.getElementById('tlumaczenie').style.display = "block";
+}
+function playSound(){
+	document.getElementById('play').play();
 }
 </script>
 
