@@ -1,7 +1,7 @@
-
-.footer {
-  position: fixed;
-  left: 0;
+.header{
+	position: fixed;
+   height: 5vh;
+   left: 0;
   bottom: 0;
   width: 100%;
   background-color: #292b2c;
@@ -9,11 +9,25 @@
   text-align: center;
 }
 body{
-	padding-top: 80px;
+	padding-top: 60px;
 
 	background-color: #292b2c;
+}
+.footer {
+  position: fixed;
+  height: 5vh;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #292b2c;
+  color: white;
+  text-align: center;
 }
 .navbar-x{
 	padding-top: 50px;
 	padding-left: 20px;
+}
+ .jumbotron {
+        padding-top: 10px !important;
+  		padding-bottom: 10px !important;
 }

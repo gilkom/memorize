@@ -9,7 +9,7 @@
   text-align: center;
 }
 body{
-	padding-top: 90px;
+	padding-top: 60px;
 
 	background-color: #292b2c;
 }
@@ -30,11 +30,4 @@ body{
  .jumbotron {
         padding-top: 10px !important;
   		padding-bottom: 10px !important;
-}
-.table{
-	width:90vh;
-	font-size: 10px;
-	padding: 0px;
-	margin: 0px;
-	
 }

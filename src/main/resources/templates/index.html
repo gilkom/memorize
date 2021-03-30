@@ -16,8 +16,45 @@
 <body>
 <header id="header" class="alt" th:include="naglowek.html :: naglowek"></header>
 
-<div class="jumbotron bg-dark text-white">
-	<h1>Strona główna</h1>
+<div class="jumbotron bg-dark text-white" style="text-align: center">
+	<h6>Strona główna</h6>
+</div>
+
+<div class="list-group">
+  <a th:href="@{/nauka}" class="list-group-item list-group-item-action list-group-item-primary flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Nauka</h5>
+       <small>Ostatnia nauka: 23.03.2021</small>
+    </div>
+    <p class="mb-1">Wybierz słowa do nauki. Możesz uczyć się po kolei wszystkich słów lub wybrać kategorię oraz ilość.</p>
+  </a>
+  <a th:href="@{/}" class="list-group-item list-group-item-action list-group-item-warning  flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Powtórki</h5>
+      <small>Słów do powtórzenia: 23</small>
+    </div>
+    <p class="mb-1">Naukę rozpoczynaj od powtórzenia przerobionego materiału.Powtarzanie regularne to klucz do sukcesu! </p>
+  </a>
+  <a th:href="@{/baza_slowek}" class="list-group-item list-group-item-action list-group-item-danger  flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Baza słówek</h5>
+      <small class="text-muted">Lista słów: 5603</small>
+    </div>
+    <p class="mb-1">Przeglądaj bazę w poszukiwaniu konkretnych słówek. Możesz sortować według kategorii lub użyć przycisku "Szukaj"</p>
+  </a>
+  <a th:href="@{/}" class="list-group-item list-group-item-action list-group-item-success  flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Statystyki</h5>
+      <small class="text-muted">Nauczonych słów: 31%</small>
+    </div>
+    <p class="mb-1">Sprawdzaj szczegółowe informacje na temat postępów w nauce.</p>
+  </a>
+  <a th:href="@{/}" class="list-group-item list-group-item-action list-group-item-dark  flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Wyloguj się</h5>
+    </div>
+    <p class="mb-1">Do zobaczenia jutro!</p>
+  </a>
 </div>
 
 <footer id="footer" class="footer" th:include="stopka.html :: stopka"></footer> 

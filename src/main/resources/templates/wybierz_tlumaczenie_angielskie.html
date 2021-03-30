@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      >
 <head>
 	<meta charset="ISO-8859-1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -40,17 +41,24 @@
 <hr/>
 
 
-<div  id="wrong"  class="container" style="display:none">
-	<h3 style="color:red; text-align:center;">Źle!</h3>
+<div  id="wrong"  class="container" style="display:none; text-align: center">
+	<h3 style="display: inline-block;color:red;">Źle!</h3>
+	<a class="btn" id="play-button" style="display: inline-block;font-size:8vw;" onclick="playSound()">&rtrif;</a>
 </div>
 
 
-<div  id="good"  class="container" style="display:none">
-	<h3 style="color:green; text-align:center;">Dobrze!</h3>
+<div  id="good"  class="container" style="display:none; text-align: center">
+	<h3 style="display: inline-block;color:green;">Dobrze!</h3>
+	<a class="btn" id="play-button" style="display: inline-block;font-size:8vw;" onclick="playSound()">&rtrif;</a>
 </div>
 
 
-<div id="tlumaczenie" class="container" style="display:none">
+<div id="tlumaczenie" class="container" style="display:none; text-align: center">
+		<audio id = "play">
+  			<source th:src="${sl.dzwiek}" type="audio/mpeg">
+ 		</audio>
+
+
 	<div class="jumbotron bg-success text_white" style="text-align:center;">
 		<p>
 			"Adams broke his leg"
@@ -105,6 +113,7 @@
 
 <script>
 function showDiv(id) {
+	document.getElementById('play').play();
 	var x=document.getElementById('nauczone').value;
 	console.log(x);
 	var y=document.getElementById('count').value;
@@ -116,13 +125,14 @@ function showDiv(id) {
 		   document.getElementById('koniecButton').style.display = "block";
 	   }
 	   document.getElementById('tlumaczenie').style.display = "block";
-	   document.getElementById('good').style.display= "block";
+	   document.getElementById('good').style.display= "inline-block";
+	   document.getElementById('play-button').style.display= "inline-block";
 	   document.getElementById(id).style.background = "green";
 	   document.getElementById('answer').value = '1';
    }else{
 	   document.getElementById('dalejButton').style.display = "block";
 	   document.getElementById('tlumaczenie').style.display = "block";
-	   document.getElementById('wrong').style.display= "block";
+	   document.getElementById('wrong').style.display= "inline-block";
 	   document.getElementById(id).style.background = "red";
 	   document.getElementById('answer').value = '0';
    };
@@ -131,6 +141,9 @@ function showDiv(id) {
    document.getElementById('trzeci').onclick =false;
    document.getElementById('czwarty').onclick =false;
 
+}
+function playSound(){
+	document.getElementById('play').play();
 }
 </script>
 
