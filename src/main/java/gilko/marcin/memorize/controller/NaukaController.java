@@ -263,4 +263,68 @@ public class NaukaController {
 		return "redirect:/nauka";
 	}
 	
+	//----------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------	
+	//Rozpoznawanie ze sluchu-----------------------------------------------------------------
+	//----------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------	
+	@RequestMapping("/rozpoznawanie_ze_sluchu/poczatek")
+	public String rozpoznawanieZeSluchuPoczatek() {
+		List<Slowo> listSlowo = new ArrayList<>();
+	 	listSlowo = bazaService.getByNumber(5);
+	 	
+	 	
+	 	
+	 	naukaService.deleteNaukaList();
+	 	naukaService.saveNaukaList(listSlowo);
+	 	
+	 	List<Nauka> naukaList = new ArrayList<>();
+	 	naukaList = naukaService.list();
+	 	
+	 	naukaService.setAllWspolczynnikToOne(naukaList);
+	 	return "redirect:/rozpoznawanie_ze_sluchu";
+	}
+	
+	@RequestMapping("/rozpoznawanie_ze_sluchu")
+	public ModelAndView rozpoznawanieZeSluchu() {
+			Double minWspolczynnik = naukaService.getMinWspolczynnik();
+			int nauczone = naukaService.countCzyUmiem();
+			Long id = naukaService.getMinIdAndWspolczynnik(minWspolczynnik);
+			/*if(id == null) {
+				prezentacjaKoniec();
+			}*/
+			int count = naukaService.list().size();
+			ModelAndView mav = new ModelAndView("wybierz_tlumaczenie_polskie");
+		 	Nauka nauka = new Nauka();
+		 	nauka = naukaService.get(id);
+		 	
+		 	Slowo sl = new Slowo();
+		 	sl = bazaService.get(id);
+
+		 	//Creating list of 4 words for quiz
+		 	List<Slowo> listLikeSlowo = new ArrayList<>();
+		 	listLikeSlowo = bazaService.searchWordsLike(sl.getSlowo());
+
+		 	listLikeSlowo.add(sl);
+
+		 	Collections.shuffle(listLikeSlowo);
+
+		 	Slowo pierwszy = listLikeSlowo.get(0);
+		 	Slowo drugi = listLikeSlowo.get(1);
+		 	Slowo trzeci = listLikeSlowo.get(2);
+		 	Slowo czwarty = listLikeSlowo.get(3);
+
+		 	mav.addObject("pierwszy", pierwszy);
+		 	mav.addObject("drugi", drugi);
+		 	mav.addObject("trzeci", trzeci);
+		 	mav.addObject("czwarty", czwarty);
+		 	mav.addObject("sl", sl);
+		 	mav.addObject("nauka", nauka);
+		 	mav.addObject("id", id);
+		 	mav.addObject("count", count);
+		 	mav.addObject("listLikeSlowo", listLikeSlowo);
+		 	mav.addObject("nauczone", nauczone);
+			return mav;
+	}
+
 }
