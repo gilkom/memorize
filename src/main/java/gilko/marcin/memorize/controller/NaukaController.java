@@ -54,13 +54,7 @@ public class NaukaController {
 			Long id = naukaService.getMinId();
 
 			ModelAndView mav = new ModelAndView("prezentacja");
-
-		 	Nauka nauka = new Nauka();
-		 	nauka = naukaService.get(id);
-		 	nauka.setCzy_umiem(true);
-		 	nauka.setWspolczynnik_powtorek(1.);
-		 	naukaService.save(nauka);
-		 	
+	
 			Slowo sl = bazaService.get(id);
 		 	mav.addObject("sl",sl);
 		 	mav.addObject("numberOfWords", numberOfWords);
@@ -70,6 +64,14 @@ public class NaukaController {
 			return mav;
 		
 		
+	}
+	@RequestMapping(value = "prezentacja/nastepny", method = RequestMethod.POST)
+	public String prezentacjaNastepny(@RequestParam(value= "id")Long id) {
+		Nauka nauka = naukaService.get(id);
+			nauka.setCzy_umiem(true);
+			nauka.setWspolczynnik_powtorek(1.);
+	naukaService.save(nauka);
+		return "redirect:/prezentacja";
 	}
 	@RequestMapping("/prezentacja/przerwij")
 	public String prezentacjaPrzerwij() {
@@ -113,6 +115,7 @@ public class NaukaController {
 	
 	@RequestMapping("/wybierz_tlumaczenie_angielskie")
 	public ModelAndView wybierzTlumaczenieAngielskie() {
+		//Selecting word with the smallest wspolczynnik powtorek and czy_umiem as false
 			Double minWspolczynnik = naukaService.getMinWspolczynnik();
 			int nauczone = naukaService.countCzyUmiem();
 			Long id = naukaService.getMinIdAndWspolczynnik(minWspolczynnik);
@@ -201,6 +204,7 @@ public class NaukaController {
 	
 	@RequestMapping("/wybierz_tlumaczenie_polskie")
 	public ModelAndView wybierzTlumaczeniePolskie() {
+		//Selecting word with the smallest wspolczynnik powtorek and czy_umiem as false
 			Double minWspolczynnik = naukaService.getMinWspolczynnik();
 			int nauczone = naukaService.countCzyUmiem();
 			Long id = naukaService.getMinIdAndWspolczynnik(minWspolczynnik);
@@ -260,7 +264,7 @@ public class NaukaController {
 		
 		naukaService.setAllCzyUmiemToFalse(naukaList);
 		
-		return "redirect:/nauka";
+		return "redirect:/rozpoznawanie_ze_sluchu";
 	}
 	
 	//----------------------------------------------------------------------------------------
@@ -287,6 +291,7 @@ public class NaukaController {
 	
 	@RequestMapping("/rozpoznawanie_ze_sluchu")
 	public ModelAndView rozpoznawanieZeSluchu() {
+		//Selecting word with the smallest wspolczynnik powtorek and czy_umiem as false
 			Double minWspolczynnik = naukaService.getMinWspolczynnik();
 			int nauczone = naukaService.countCzyUmiem();
 			Long id = naukaService.getMinIdAndWspolczynnik(minWspolczynnik);
@@ -294,7 +299,7 @@ public class NaukaController {
 				prezentacjaKoniec();
 			}*/
 			int count = naukaService.list().size();
-			ModelAndView mav = new ModelAndView("wybierz_tlumaczenie_polskie");
+			ModelAndView mav = new ModelAndView("rozpoznawanie_ze_sluchu");
 		 	Nauka nauka = new Nauka();
 		 	nauka = naukaService.get(id);
 		 	
@@ -326,5 +331,91 @@ public class NaukaController {
 		 	mav.addObject("nauczone", nauczone);
 			return mav;
 	}
+	@RequestMapping(value = "/rozpoznawanie_ze_sluchu/nastepny", method = RequestMethod.POST)
+	public String rozpoznawanieZeSluchuNastepny(@RequestParam(value = "answer") int answer,
+														@RequestParam(value= "id")Long id) {
+		Nauka nauka = naukaService.get(id);
+		if(answer == 1) {
+			nauka.setCzy_umiem(true);
+		}else {
+			nauka.setWspolczynnik_powtorek(nauka.getWspolczynnik_powtorek()+ 0.01);
+		}
+		naukaService.save(nauka);
+		return "redirect:/rozpoznawanie_ze_sluchu";
+	}
+	@RequestMapping("/rozpoznawanie_ze_sluchu/koniec")
+	public String rozpoznawanieZeSluchuKoniec() {
+		List<Nauka> naukaList = new ArrayList<>();
+		naukaList = naukaService.list();
+		
+		naukaService.setAllCzyUmiemToFalse(naukaList);
+		
+		return "redirect:/nauka";
+	}
+	
+		//----------------------------------------------------------------------------------------
+		//----------------------------------------------------------------------------------------	
+		//Dyktando--------------------------------------------------------------------------------
+		//----------------------------------------------------------------------------------------
+		//----------------------------------------------------------------------------------------	
+	@RequestMapping("/dyktando/poczatek")
+	public String dyktandoPoczatek() {
+		List<Slowo> listSlowo = new ArrayList<>();
+	 	listSlowo = bazaService.getByNumber(5);
+	 	
+	 	
+	 	
+	 	naukaService.deleteNaukaList();
+	 	naukaService.saveNaukaList(listSlowo);
+	 	
+	 	List<Nauka> naukaList = new ArrayList<>();
+	 	naukaList = naukaService.list();
+	 	
+	 	naukaService.setAllWspolczynnikToOne(naukaList);
+	 	return "redirect:/dyktando";
+	}
+	
+	@RequestMapping("/dyktando")
+	public ModelAndView dyktando() {
+			//Selecting word with the smallest wspolczynnik powtorek and czy_umiem as false
+			Double minWspolczynnik = naukaService.getMinWspolczynnik();
+			int nauczone = naukaService.countCzyUmiem();
+			Long id = naukaService.getMinIdAndWspolczynnik(minWspolczynnik);
+	
+			int count = naukaService.list().size();
+			ModelAndView mav = new ModelAndView("dyktando");
+		 	Nauka nauka = new Nauka();
+		 	nauka = naukaService.get(id);
+		 	
+		 	Slowo sl = new Slowo();
+		 	sl = bazaService.get(id);
 
+		 	mav.addObject("sl", sl);
+		 	mav.addObject("nauka", nauka);
+		 	mav.addObject("id", id);
+		 	mav.addObject("count", count);
+		 	mav.addObject("nauczone", nauczone);
+			return mav;
+	}
+	@RequestMapping(value = "/dyktando/nastepny", method = RequestMethod.POST)
+	public String dyktandoNastepny(@RequestParam(value = "answer") int answer,
+														@RequestParam(value= "id")Long id) {
+		Nauka nauka = naukaService.get(id);
+		if(answer == 1) {
+			nauka.setCzy_umiem(true);
+		}else {
+			nauka.setWspolczynnik_powtorek(nauka.getWspolczynnik_powtorek()+ 0.01);
+		}
+		naukaService.save(nauka);
+		return "redirect:/dyktando";
+	}
+	@RequestMapping("/dyktando/koniec")
+	public String dyktandoKoniec() {
+		List<Nauka> naukaList = new ArrayList<>();
+		naukaList = naukaService.list();
+		
+		naukaService.setAllCzyUmiemToFalse(naukaList);
+		
+		return "redirect:/nauka";
+	}
 }
