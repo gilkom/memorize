@@ -416,6 +416,71 @@ public class NaukaController {
 		
 		naukaService.setAllCzyUmiemToFalse(naukaList);
 		
+		return "redirect:/wpisz_tlumaczenie";
+	}
+			//----------------------------------------------------------------------------------------
+			//----------------------------------------------------------------------------------------	
+			//Wpisz tlumaczenie-----------------------------------------------------------------------
+			//----------------------------------------------------------------------------------------
+			//----------------------------------------------------------------------------------------	
+	@RequestMapping("/wpisz_tlumaczenie/poczatek")
+	public String wpiszTlumaczeniePoczatek() {
+		List<Slowo> listSlowo = new ArrayList<>();
+	 	listSlowo = bazaService.getByNumber(5);
+	 	
+	 	
+	 	
+	 	naukaService.deleteNaukaList();
+	 	naukaService.saveNaukaList(listSlowo);
+	 	
+	 	List<Nauka> naukaList = new ArrayList<>();
+	 	naukaList = naukaService.list();
+	 	
+	 	naukaService.setAllWspolczynnikToOne(naukaList);
+	 	return "redirect:/wpisz_tlumaczenie";
+	}
+	
+	@RequestMapping("/wpisz_tlumaczenie")
+	public ModelAndView wpiszTlumaczenie() {
+			//Selecting word with the smallest wspolczynnik powtorek and czy_umiem as false
+			Double minWspolczynnik = naukaService.getMinWspolczynnik();
+			int nauczone = naukaService.countCzyUmiem();
+			Long id = naukaService.getMinIdAndWspolczynnik(minWspolczynnik);
+	
+			int count = naukaService.list().size();
+			ModelAndView mav = new ModelAndView("wpisz_tlumaczenie");
+		 	Nauka nauka = new Nauka();
+		 	nauka = naukaService.get(id);
+		 	
+		 	Slowo sl = new Slowo();
+		 	sl = bazaService.get(id);
+
+		 	mav.addObject("sl", sl);
+		 	mav.addObject("nauka", nauka);
+		 	mav.addObject("id", id);
+		 	mav.addObject("count", count);
+		 	mav.addObject("nauczone", nauczone);
+			return mav;
+	}
+	@RequestMapping(value = "/wpisz_tlumaczenie/nastepny", method = RequestMethod.POST)
+	public String wpiszTlumaczenieNastepny(@RequestParam(value = "answer") int answer,
+														@RequestParam(value= "id")Long id) {
+		Nauka nauka = naukaService.get(id);
+		if(answer == 1) {
+			nauka.setCzy_umiem(true);
+		}else {
+			nauka.setWspolczynnik_powtorek(nauka.getWspolczynnik_powtorek()+ 0.01);
+		}
+		naukaService.save(nauka);
+		return "redirect:/wpisz_tlumaczenie";
+	}
+	@RequestMapping("/wpisz_tlumaczenie/koniec")
+	public String wpiszTlumaczenieKoniec() {
+		List<Nauka> naukaList = new ArrayList<>();
+		naukaList = naukaService.list();
+		
+		naukaService.setAllCzyUmiemToFalse(naukaList);
+		
 		return "redirect:/nauka";
 	}
 }

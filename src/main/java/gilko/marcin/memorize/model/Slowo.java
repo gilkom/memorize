@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "memo_slowo")
@@ -17,22 +18,32 @@ public class Slowo {
 	private String tlumaczenie;
 	private String rodzaj;
 	private String dzwiek;
+	private String obraz;
 	
 	public Slowo() {};
 	
-	public Slowo(Long id_slowa, String slowo, String tlumaczenie, String rodzaj, String dzwiek) {
+	public Slowo(Long id_slowa, String slowo, String tlumaczenie, String rodzaj, String dzwiek, String obraz) {
 		this.id_slowa = id_slowa;
 		this.slowo = slowo;
 		this.tlumaczenie = tlumaczenie;
 		this.rodzaj = rodzaj;
 		this.dzwiek = dzwiek;
+		this.obraz = obraz;
 		
 	}
 	
 	@Override
 	public String toString() {
 		return "id_slowa: " + id_slowa + ", slowo: " + slowo + ", tlumaczenie: " + tlumaczenie + ", rodzaj: " +
-				rodzaj + ", dzwiek: " + dzwiek;
+				rodzaj + ", dzwiek: " + dzwiek + ", obraz: " + obraz;
+	}
+	@Transient
+	public String getObrazImagePath() {
+		if(obraz == null || obraz.isEmpty()) {
+			return "";
+		}else {
+			return obraz;
+		}
 	}
 	
 	public Long getId_slowa() {
@@ -65,5 +76,11 @@ public class Slowo {
 	}
 	public void setDzwiek(String dzwiek) {
 		this.dzwiek = dzwiek;
+	}
+	public String getObraz() {
+		return obraz;
+	}
+	public void setObraz(String obraz) {
+		this.obraz = obraz;
 	}
 }

@@ -41,24 +41,25 @@
 
 			
 			<tr>
-			<td  class="hiddenRow" colspan="5" style="padding:0px">
-				<div class="accordion-body collapse" th:id="'demo' +${slowo.id_slowa}">
+			<td  class="hiddenRow" colspan="a" style="padding:0px">
+				<div class="accordion-body collapse" th:id="'demo' +${slowo.id_slowa}">		
 					<div>
 						<div>
-						
+							<div>
 							&nbspSłowo: <h5 th:text="${slowo.slowo}"></h5><br>
 							&nbspTłumaczenie: <h6 th:text="${slowo.tlumaczenie}">Tłumaczenie</h6><br>
 							&nbspRodzaj: <a th:text="${slowo.rodzaj}">Rodzaj</a><br>
 							&nbspDzwięk: <a th:text="${slowo.dzwiek}">Dzwięk</a><br>
 							
 							&nbspOdtwórz: <a class="btn btn-success" th:id="${slowo.dzwiek}" style="display: inline-block;font-size:3vw;" onclick="playSound(this.id)">&rtrif;</a>
-							
-							
+
+							&nbsp<img th:src="${slowo.obrazImagePath}" class="img-thumbnail" style="max-width: 60%;">
+
 							<audio th:id = "play">
 					  			<source th:src="${slowo.dzwiek}" type="audio/mpeg">
 							</audio>
 						</div>
-
+					</div>
 					</div>
 				</div>
 			</td>
