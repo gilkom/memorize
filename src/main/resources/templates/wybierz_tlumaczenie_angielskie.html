@@ -28,20 +28,20 @@
 
 
 <div class="container">
-	<div class="jumbotron bg-secondary text-white" style="text-align:center;margin:4px;">
+	<div class="jumbotron bg-secondary text-white" style="text-align:center;margin-bottom:4px;">
 		<h5 th:text="${sl.slowo}"></h5>
 		<input type="hidden" id="tlum" th:value="${sl.tlumaczenie}"></input>
 	</div>
 </div>
 
+
 <div class="container">
-	<div class="container">
-		<input id="pierwszy" type="submit" th:value="${pierwszy.tlumaczenie}" class="btn btn-dark btn-block" onclick="showDiv(this.id)"/>
-		<input id="drugi" type="submit" th:value="${drugi.tlumaczenie}" class="btn btn-dark btn-block" onclick="showDiv(this.id)"/>
-		<input id="trzeci" type="submit" th:value="${trzeci.tlumaczenie}" class="btn btn-dark btn-block" onclick="showDiv(this.id)"/>
-		<input id="czwarty" type="submit" th:value="${czwarty.tlumaczenie}" class="btn btn-dark btn-block" onclick="showDiv(this.id)"/>
-	</div>
+	<input id="pierwszy" type="submit" th:value="${pierwszy.tlumaczenie}" class="btn btn-dark btn-block" onclick="showDiv(this.id)"/>
+	<input id="drugi" type="submit" th:value="${drugi.tlumaczenie}" class="btn btn-dark btn-block" onclick="showDiv(this.id)"/>
+	<input id="trzeci" type="submit" th:value="${trzeci.tlumaczenie}" class="btn btn-dark btn-block" onclick="showDiv(this.id)"/>
+	<input id="czwarty" type="submit" th:value="${czwarty.tlumaczenie}" class="btn btn-dark btn-block" onclick="showDiv(this.id)"/>
 </div>
+
 <hr class="myhr"/>
 
 
@@ -66,8 +66,8 @@
 				<a class="btn" id="play-button" style="display: inline-block;font-size:8vw;" onclick="playSound()">&rtrif;</a>
 			</div>
 		</div>
-		<div class="col">
-	      	<img th:src="${sl.obrazImagePath}" class="img-thumbnail" style="max-width: 80%;">
+		<div class="col" style="height:130px;">
+	      	<img th:src="${sl.obrazImagePath}" class="img-thumbnail" style="width: auto;max-height: 100%">
 	    </div>
 	  </div>
 	<div class="jumbotron bg-success text_white" style="text-align:center;margin:4px;">
@@ -147,13 +147,10 @@ function showDiv(id) {
 	   document.getElementById(id).style.background = "red";
 	   if(document.getElementById('pierwszy').value == document.getElementById('tlum').value){
 		   document.getElementById('pierwszy').style.background = "green";
-		   console.log('!!!!');
 	   }else if(document.getElementById('drugi').value == document.getElementById('tlum').value){
 		   document.getElementById('drugi').style.background = "green";
-		   console.log('!!!!2');
 	   }else if(document.getElementById('trzeci').value == document.getElementById('tlum').value){
 		   document.getElementById('trzeci').style.background = "green";
-		   console.log('!!!!2');
 	   }else if(document.getElementById('czwarty').value == document.getElementById('tlum').value){
 		   document.getElementById('czwarty').style.background = "green";
 		}
