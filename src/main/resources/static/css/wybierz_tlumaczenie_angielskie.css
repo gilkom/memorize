@@ -31,3 +31,6 @@ body{
         padding-top: 10px !important;
   		padding-bottom: 10px !important;
 }
+hr.myhr{
+	margin:5px;
+}
