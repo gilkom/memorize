@@ -15,44 +15,53 @@
 </head>
 
 <body>
-<header id="header" class="header" th:include="naglowek_dyktando.html :: naglowek"></header>
-<div class="container">
-	<div>
-		<a th:href="@{'/prezentacja/przerwij'}" class="btn btn-dark">Przerwij</a>
-	</div>
+
+<header id="header" class="header" th:include="naglowek_wpisz_tlumaczenie.html :: naglowek"></header>
+
+
+<div class="container" style="margin-bottom:0px;">
+	<a th:href="@{'/prezentacja/przerwij'}" class="btn btn-dark">Przerwij</a>
 	<a>Poprawne: </a><a th:text="${nauczone}"></a>/
 	<a th:text="${count}"></a>
-	<hr/>
+	<hr class="myhr"/>
 </div>
+
 
 <div class="container" style="text-align: center">
-	<h3 style="display: inline-block;" th:text="${sl.slowo}"></h3>
- 		<h6>Wpisz tłumaczenie:</h6>
- 		<input id="odpowiedz" name="odpowiedz" autofocus/><br><br>
+	<h3 style="display: inline-block;" th:text="${sl.slowo}"></h3><br/>
+ 		<h6  style="display: inline-block;">Wpisz tłumaczenie:</h6><br/>
+ 		<input id="odpowiedz" name="odpowiedz" autofocus/><br/>
  		<input type="hidden" id="tlum" th:value="${sl.tlumaczenie}"/>
- 		<button id="sprawdz" type="button" class="btn btn-dark" onclick="showDiv()">Sprawdz</button>
+ 		<button id="sprawdz" type="button" class="btn btn-dark" onclick="showDiv()" style="margin: 4px;">Sprawdz</button>
 </div>
-<hr/>
-<div  id="wrong"  class="container" style="display:none; text-align: center">
-	<h4 style="display: block;color:red;">Źle!</h4>
-	<h3 style="display: inline-block;" th:text="${sl.slowo}"></h3>
-	<a class="btn" id="play-button" style="display: inline-block;font-size:8vw;" onclick="playSound()">&rtrif;</a>
-</div>
+<hr class="myhr"/>
 
+<audio id = "play">
+  		<source th:src="${sl.dzwiek}" type="audio/mpeg">
+ 	</audio>
 
-<div  id="good"  class="container" style="display:none; text-align: center">
-	<h4 style="display: block;color:green;">Dobrze!</h4>
-	<h3 style="display: inline-block;" th:text="${sl.slowo}"></h3>
-	<a class="btn" id="play-button" style="display: inline-block;font-size:8vw;" onclick="playSound()">&rtrif;</a>
-</div>
 
 <div id="tlumaczenie" class="container" style="display:none; text-align: center">
-		<audio id = "play">
-  			<source th:src="${sl.dzwiek}" type="audio/mpeg">
- 		</audio>
+	<div class="row align-items-center">
+		<div class="col" style="text-align:center;">
+			<div  id="wrong"  class="container" style="display:none; text-align: center">
+				<h3 style="color:red;">Źle!</h3>
+				<h5 style="display: inline-block;" th:text="${sl.slowo}"></h5>
+				<a class="btn" id="play-button" style="display: inline-block;font-size:4vw; margin-top: 0px; padding-top: 0px; margin-bottom: 5px;" onclick="playSound()">&rtrif;</a>
+			</div>
 
-
-	<div class="jumbotron bg-success text_white" style="text-align:center;">
+			<div  id="good"  class="container" style="display:none; text-align: center">
+				<h4 style="color:green;">Dobrze!</h4>
+				<h3 style="display: inline-block;" th:text="${sl.slowo}"></h3>
+				<a class="btn" id="play-button" style="display: inline-block;font-size:4vw; margin-top: 0px; padding-top: 0px; margin-bottom: 5px;" onclick="playSound()">&rtrif;</a>
+			</div>
+		</div>
+		<div class="col" style="height:130px;">
+	      	<img th:src="${sl.obrazImagePath}" class="img-thumbnail" style="width: auto;max-height: 100%">
+	    </div>
+	</div>	
+	
+	<div class="jumbotron bg-success text_white" style="text-align:center;margin:4px;">
 		<p>
 			"Adams broke his leg"
 		</p>
@@ -64,10 +73,10 @@
 			<input id="count" type="hidden" name="answer" th:value="${count}"/>
 			<input id="id" type="hidden" name="id" th:value="${id}"/>
 			<div id="dalejButton" style="display:none">
-				<button id="dalej" type="submit" class="btn float-right btn-dark">Dalej</button>
+				<button id="dalej" type="submit" class="btn float-right btn-dark" style="margin:5px;">Dalej</button>
 			</div>
 			<div id="koniecButton" style="display:none">
-				<button id="koniec"  type="button" class="btn float-right btn-success" data-toggle="modal" data-target="#etapyModal">Koniec</button>
+				<button id="koniec"  type="button" class="btn float-right btn-success" data-toggle="modal" data-target="#etapyModal" style="margin:5px;">Koniec</button>
 			</div>
 			
 			<div class="modal fade" id="etapyModal" tabindex="-1" role="dialog" aria-labelledby="etapyModalLabel" aria-hidden="true">

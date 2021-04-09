@@ -52,18 +52,19 @@
 		<audio id = "play">
   			<source th:src="${sl.dzwiek}" type="audio/mpeg">
  		</audio>
+ 		
  		<div class="row align-items-center">
 	  
 	    <div class="col" style="text-align:center;">
 			<div  id="wrong"  class="container" style="display:none; text-align: center">
 				<h3 style="display: inline-block;color:red;">Źle!</h3>
-				<a class="btn" id="play-button" style="display: inline-block;font-size:8vw;" onclick="playSound()">&rtrif;</a>
+				<a class="btn" id="play-button" style="display: inline-block;font-size:4vw; margin-top: 0px; padding-top: 0px; margin-bottom: 5px;" onclick="playSound()">&rtrif;</a>
 			</div>
 
 
 			<div  id="good"  class="container" style="display:none; text-align: center">
 				<h3 style="display: inline-block;color:green;">Dobrze!</h3>
-				<a class="btn" id="play-button" style="display: inline-block;font-size:8vw;" onclick="playSound()">&rtrif;</a>
+				<a class="btn" id="play-button" style="display: inline-block;font-size:4vw; margin-top: 0px; padding-top: 0px; margin-bottom: 5px;" onclick="playSound()">&rtrif;</a>
 			</div>
 		</div>
 		<div class="col" style="height:130px;">
