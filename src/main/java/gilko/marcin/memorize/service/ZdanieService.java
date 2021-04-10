@@ -30,5 +30,8 @@ public class ZdanieService {
 	public void delete(Long id) {
 		repo.deleteById(id);
 	}
+	public List<Zdanie> listByIdSlowa(Long id){
+		return repo.listByIdSlowa(id);
+	}
 
 }

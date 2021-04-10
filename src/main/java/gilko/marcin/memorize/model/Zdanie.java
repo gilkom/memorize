@@ -56,4 +56,10 @@ public class Zdanie {
 	public void setDzwiek(String dzwiek) {
 		this.dzwiek = dzwiek;
 	}
+	public Slowo getSlowo() {
+		return slowo;
+	}
+	public void setSlowo(Slowo slowo) {
+		this.slowo = slowo;
+	}
 }

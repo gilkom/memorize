@@ -15,8 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import gilko.marcin.memorize.model.Nauka;
 import gilko.marcin.memorize.model.Slowo;
+import gilko.marcin.memorize.model.Zdanie;
 import gilko.marcin.memorize.service.BazaSlowekService;
 import gilko.marcin.memorize.service.NaukaService;
+import gilko.marcin.memorize.service.ZdanieService;
 
 @Controller
 public class NaukaController {
@@ -25,6 +27,8 @@ public class NaukaController {
 	private BazaSlowekService bazaService;
 	@Autowired
 	private NaukaService naukaService;
+	@Autowired
+	private ZdanieService zdanieService;
 	
 	@RequestMapping("/nauka")
 	public String nauka(Model model) {
@@ -56,7 +60,14 @@ public class NaukaController {
 			ModelAndView mav = new ModelAndView("prezentacja");
 	
 			Slowo sl = bazaService.get(id);
+			System.out.println("......");
+			List<Zdanie> listZdanie = zdanieService.listByIdSlowa(id);
+			
+			System.out.println("xxxxx: " + listZdanie.get(0).getId_zdania());
+			System.out.println("xxxxx: " + listZdanie.get(0).getSlowo().getId_slowa());
+			System.out.println("xxxxx: " + listZdanie.get(0).getId_zdania());
 		 	mav.addObject("sl",sl);
+		 	mav.addObject("listZdanie", listZdanie);
 		 	mav.addObject("numberOfWords", numberOfWords);
 		 	mav.addObject("id", id);
 		 	
