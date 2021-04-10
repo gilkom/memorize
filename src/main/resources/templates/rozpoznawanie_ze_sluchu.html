@@ -70,11 +70,7 @@
 	    </div>
 	</div>
 	
-	<div class="jumbotron bg-success text_white" style="text-align:center;margin:4px;">
-		<p>
-			"Adams broke his leg"
-		</p>
-	</div>
+	<div th:replace="zdania.html :: zdania"></div>
 	
 	<div>
 		<form method="post" th:action="@{/rozpoznawanie_ze_sluchu/nastepny}">
