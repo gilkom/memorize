@@ -60,14 +60,16 @@ public class NaukaController {
 			ModelAndView mav = new ModelAndView("prezentacja");
 	
 			Slowo sl = bazaService.get(id);
-			System.out.println("......");
 			List<Zdanie> listZdanie = zdanieService.listByIdSlowa(id);
+			Collections.shuffle(listZdanie);
+			Zdanie zdanie = new Zdanie();
+		 	if(!listZdanie.isEmpty()) {
+		 		zdanie = listZdanie.get(0);
+		 	};
 			
-			System.out.println("xxxxx: " + listZdanie.get(0).getId_zdania());
-			System.out.println("xxxxx: " + listZdanie.get(0).getSlowo().getId_slowa());
-			System.out.println("xxxxx: " + listZdanie.get(0).getId_zdania());
+
 		 	mav.addObject("sl",sl);
-		 	mav.addObject("listZdanie", listZdanie);
+		 	mav.addObject("zdanie", zdanie);
 		 	mav.addObject("numberOfWords", numberOfWords);
 		 	mav.addObject("id", id);
 		 	
@@ -155,6 +157,13 @@ public class NaukaController {
 		 	Slowo trzeci = listLikeSlowo.get(2);
 		 	Slowo czwarty = listLikeSlowo.get(3);
 
+		 	List<Zdanie> listZdanie = zdanieService.listByIdSlowa(id);
+			Collections.shuffle(listZdanie);
+			Zdanie zdanie = new Zdanie();
+		 	if(!listZdanie.isEmpty()) {
+		 		zdanie = listZdanie.get(0);
+		 	};
+		 	
 		 	mav.addObject("pierwszy", pierwszy);
 		 	mav.addObject("drugi", drugi);
 		 	mav.addObject("trzeci", trzeci);
@@ -165,6 +174,7 @@ public class NaukaController {
 		 	mav.addObject("count", count);
 		 	mav.addObject("listLikeSlowo", listLikeSlowo);
 		 	mav.addObject("nauczone", nauczone);
+		 	mav.addObject("zdanie", zdanie);
 			return mav;
 	}
 	
@@ -243,6 +253,14 @@ public class NaukaController {
 		 	Slowo trzeci = listLikeSlowo.get(2);
 		 	Slowo czwarty = listLikeSlowo.get(3);
 
+		 	
+		 	List<Zdanie> listZdanie = zdanieService.listByIdSlowa(id);
+			Collections.shuffle(listZdanie);
+			Zdanie zdanie = new Zdanie();
+		 	if(!listZdanie.isEmpty()) {
+		 		zdanie = listZdanie.get(0);
+		 	};
+			
 		 	mav.addObject("pierwszy", pierwszy);
 		 	mav.addObject("drugi", drugi);
 		 	mav.addObject("trzeci", trzeci);
@@ -253,6 +271,7 @@ public class NaukaController {
 		 	mav.addObject("count", count);
 		 	mav.addObject("listLikeSlowo", listLikeSlowo);
 		 	mav.addObject("nauczone", nauczone);
+		 	mav.addObject("zdanie", zdanie);
 			return mav;
 	}
 	@RequestMapping(value = "/wybierz_tlumaczenie_polskie/nastepny", method = RequestMethod.POST)
@@ -330,6 +349,13 @@ public class NaukaController {
 		 	Slowo trzeci = listLikeSlowo.get(2);
 		 	Slowo czwarty = listLikeSlowo.get(3);
 
+		 	List<Zdanie> listZdanie = zdanieService.listByIdSlowa(id);
+			Collections.shuffle(listZdanie);
+			Zdanie zdanie = new Zdanie();
+		 	if(!listZdanie.isEmpty()) {
+		 		zdanie = listZdanie.get(0);
+		 	};
+		 	
 		 	mav.addObject("pierwszy", pierwszy);
 		 	mav.addObject("drugi", drugi);
 		 	mav.addObject("trzeci", trzeci);
@@ -340,6 +366,7 @@ public class NaukaController {
 		 	mav.addObject("count", count);
 		 	mav.addObject("listLikeSlowo", listLikeSlowo);
 		 	mav.addObject("nauczone", nauczone);
+		 	mav.addObject("zdanie", zdanie);
 			return mav;
 	}
 	@RequestMapping(value = "/rozpoznawanie_ze_sluchu/nastepny", method = RequestMethod.POST)
@@ -401,6 +428,14 @@ public class NaukaController {
 		 	Slowo sl = new Slowo();
 		 	sl = bazaService.get(id);
 
+		 	List<Zdanie> listZdanie = zdanieService.listByIdSlowa(id);
+			Collections.shuffle(listZdanie);
+			Zdanie zdanie = new Zdanie();
+		 	if(!listZdanie.isEmpty()) {
+		 		zdanie = listZdanie.get(0);
+		 	};
+		 	
+			mav.addObject("zdanie", zdanie);
 		 	mav.addObject("sl", sl);
 		 	mav.addObject("nauka", nauka);
 		 	mav.addObject("id", id);
@@ -465,7 +500,17 @@ public class NaukaController {
 		 	
 		 	Slowo sl = new Slowo();
 		 	sl = bazaService.get(id);
+		 	List<Zdanie> listZdanie = zdanieService.listByIdSlowa(id);
 
+			Collections.shuffle(listZdanie);
+
+			Zdanie zdanie = new Zdanie();
+		 	if(!listZdanie.isEmpty()) {
+		 		zdanie = listZdanie.get(0);
+		 	};
+
+			
+		 	mav.addObject("zdanie", zdanie);
 		 	mav.addObject("sl", sl);
 		 	mav.addObject("nauka", nauka);
 		 	mav.addObject("id", id);
