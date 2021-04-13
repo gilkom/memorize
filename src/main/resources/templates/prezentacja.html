@@ -16,10 +16,17 @@
 <header id="header" class="alt" th:include="naglowek_prezentacja.html :: naglowek"></header>
 
 	<div class="container" style="margin-bottom:0px;">
+		<div class="row">
+			<div class="col">
 			<a th:href="@{'/prezentacja/przerwij'}" class="btn btn-dark" style="display: inline-block;">Przerwij</a>
 				<a style="display: inline-block;">Liczba słów: </a>
 				<a style="display: inline-block;" th:text="${id}"></a>/
 				<a style="display: inline-block;" th:text="${numberOfWords}"></a>
+			</div>
+			<div class="col" style="text-align:right;">
+				<a th:text="${sl.rodzaj}"></a>
+			</div>
+		</div>
 				<hr class="myhr"/>
 			<audio id = "play">
 	  			<source th:src="${sl.dzwiek}" type="audio/mpeg">

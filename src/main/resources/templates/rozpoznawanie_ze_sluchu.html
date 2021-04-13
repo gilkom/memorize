@@ -16,9 +16,16 @@
 <header id="header" class="alt" th:include="naglowek_rozpoznawanie_ze_sluchu.html :: naglowek"></header>
 
 <div class="container" style="margin-bottom:0px;">
-	<a th:href="@{'/prezentacja/przerwij'}" class="btn btn-dark">Przerwij</a>
-	<a>Poprawne: </a><a th:text="${nauczone}"></a>/
-	<a th:text="${count}"></a>
+	<div class="row">
+		<div class="col">
+			<a th:href="@{'/prezentacja/przerwij'}" class="btn btn-dark">Przerwij</a>
+			<a>Poprawne: </a><a th:text="${nauczone}"></a>/
+			<a th:text="${count}"></a>
+		</div>
+		<div class="col" style="text-align:right;">		
+			<a th:text="${sl.rodzaj}"></a>
+		</div>
+	</div>
 	<hr class="myhr"/>
 </div>
 
